@@ -1,19 +1,18 @@
 import React, { useState } from 'react'
 import '../styles/App.css';
 const App = () => {
-
-  const [divName ,setDivName] = useState();
+  const [divName ,setDivName] = useState('square');
   const [shapes ,setShapes] = useState([]);
-
+  const [shapeCount, setShapeCount] =useState(0);
   function addShape(){
-    setShapes(<div className={divName}></div>);
+    let newDiv = ( <div className={divName}>{shapeCount}</div>);
+    setShapeCount(shapeCount + 1);
+    setShapes([...shapes, newDiv]);
   }
-
   function handleClick(e){
     console.log(e.target.value);
     setDivName(e.target.value);
   }
-
   return (
     <div id="main">
       <div id="shape-creator">
@@ -24,11 +23,18 @@ const App = () => {
         <button onClick={addShape}>Add shape</button>
       </div>
       <div id="shapes-holder">
-        {shapes}
+        {shapes.map((shape, index) => shape)}
       </div>
     </div>
   )
 }
-
-
 export default App;
+
+
+
+
+
+
+
+
+
